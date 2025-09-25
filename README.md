@@ -29,22 +29,29 @@ src/
 ## ▶️ Getting Started
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/SohaTalaat/Angular-DemoStore.git
    cd angular-DemoStore
    ```
 
-## Install dependencies:
+2. Install dependencies:
 
+```bash
 npm install
+```
 
-## Run the development server:
+3. Run the development server:
 
+```bash
 ng serve
+```
 
-## Open in your browser:
+4. Open in your browser:
 
+```bash
 http://localhost:4200/
+```
 
 ## 📜 License
 
