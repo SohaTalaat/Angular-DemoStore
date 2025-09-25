@@ -7,7 +7,7 @@ import { SearchFilterPipe } from '../custom-pipe';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, ProductCard, FormsModule, SearchFilterPipe],
+  imports: [CommonModule, ProductCard, FormsModule],
   standalone: true,
   template: `
     <div class="card">
