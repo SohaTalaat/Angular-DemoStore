@@ -1,0 +1,66 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ProductService, CartItem } from '../product';
+import { CurrencyPipe } from '../custom-pipe';
+
+@Component({
+  selector: 'app-product-cart',
+  imports: [CommonModule, CurrencyPipe],
+  template: `
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        <h4 class="card-title mb-0">
+          <i class="bi bi-cart"></i> Shopping Cart ({{ cart().length }})
+        </h4>
+      </div>
+
+      <div class="card-body">
+        @if (cart().length === 0) {
+        <div class="text-center text-muted py-3">
+          <i class="bi bi-cart-x display-6"></i>
+          <p class="mt-2">Your cart is empty</p>
+        </div>
+        } @if (cart().length > 0) { @for (item of cart(); track item.productId) {
+        <div class="d-flex align-items-center justify-content-between border-bottom py-2">
+          <div class="d-flex align-items-center">
+            <img
+              [src]="item.thumbnail"
+              class="rounded me-3"
+              style="width: 50px; height: 50px; object-fit: cover;"
+              [alt]="item.title"
+            />
+            <div>
+              <h6 class="mb-0">{{ item.title }}</h6>
+              <small class="text-success">{{ item.price | currency : '$' }}</small>
+            </div>
+          </div>
+          <button class="btn btn-danger btn-sm" (click)="removeFromCart(item.productId)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+        }
+
+        <div class="mt-3 pt-2 border-top">
+          <div class="d-flex justify-content-between align-items-center">
+            <strong>Total: {{ getTotal() | currency : '$' }}</strong>
+            <button class="btn btn-primary"><i class="bi bi-credit-card"></i> Checkout</button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  `,
+})
+export class ProductCart {
+  constructor(public productService: ProductService) {}
+
+  cart = () => this.productService.cart();
+
+  removeFromCart(productId: number) {
+    this.productService.removeFromCart(productId);
+  }
+
+  getTotal(): number {
+    return this.cart().reduce((sum, item) => sum + item.price, 0);
+  }
+}
