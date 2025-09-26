@@ -1,18 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'currency',
-  standalone: true,
-})
-export class CurrencyPipe implements PipeTransform {
-  transform(value: number, currencySymbol: string = '$'): string {
-    return `${currencySymbol}${value.toFixed(2)}`;
-  }
-}
-
-@Pipe({
   name: 'slice30',
-  standalone: true,
 })
 export class SliceDescriptionPipe implements PipeTransform {
   transform(value: string, limit: number = 30): string {
@@ -23,7 +12,6 @@ export class SliceDescriptionPipe implements PipeTransform {
 
 @Pipe({
   name: 'searchFilter',
-  standalone: true,
 })
 export class SearchFilterPipe implements PipeTransform {
   transform(items: any[], searchText: string, properties: string[]): any[] {
